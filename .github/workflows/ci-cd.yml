@@ -31,7 +31,7 @@ jobs:
         run: python -m pytest -v
 
   docker-build:
-    name: Build Docker Image
+    name: Build and Test Docker Container
     needs: test
     runs-on: ubuntu-latest
 
@@ -41,3 +41,23 @@ jobs:
 
       - name: Build Docker Image
         run: docker build -t online-quiz-devops:latest .
+
+      - name: Start Docker Container
+        run: docker run -d --name quiz-test -p 5000:5000 online-quiz-devops:latest
+
+      - name: Test Application Health
+        run: |
+          for i in {1..10}; do
+            if curl --fail --silent http://localhost:5000/ > /dev/null; then
+              echo "Application health check passed!"
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs quiz-test
+          echo "Application health check failed!"
+          exit 1
+
+      - name: Cleanup Docker Container
+        if: always()
+        run: docker rm -f quiz-test || true
