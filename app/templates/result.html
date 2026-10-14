@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result | Online Quiz System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Quiz Completed!</h1>
+        <p>Your performance summary</p>
+    </header>
+
+    <main class="container result-card">
+        <h2>Your Result</h2>
+
+        <p class="score">{{ score }} / {{ total }}</p>
+
+        <p>
+            {% if score == total %}
+                Excellent! You answered every question correctly.
+            {% elif score >= total / 2 %}
+                Good job! Keep practising to improve your score.
+            {% else %}
+                Don't give up! Try again and improve your knowledge.
+            {% endif %}
+        </p>
+
+        <a href="{{ url_for('quiz') }}" class="btn">Try Again</a>
+        <a href="{{ url_for('home') }}" class="btn secondary-btn">Home</a>
+    </main>
+
+    <footer>
+        <p>Online Quiz System | Built with Flask</p>
+    </footer>
+</body>
+</html>

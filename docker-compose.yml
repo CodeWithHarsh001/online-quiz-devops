@@ -1,0 +1,8 @@
+
+services:
+  quiz-app:
+    build: .
+    container_name: quiz-compose-app
+    ports:
+      - "5001:5000"
+    restart: unless-stopped

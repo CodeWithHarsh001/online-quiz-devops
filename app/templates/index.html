@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Quiz System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Online Quiz System</h1>
+        <p>Test your knowledge and improve your skills!</p>
+    </header>
+
+    <main class="container home-card">
+        <h2>Welcome to the Quiz</h2>
+        <p>Answer 5 multiple-choice questions and check your score.</p>
+        <a href="{{ url_for('quiz') }}" class="btn">Start Quiz</a>
+    </main>
+
+    <footer>
+        <p>Online Quiz System | Built with Flask</p>
+    </footer>
+</body>
+</html>
